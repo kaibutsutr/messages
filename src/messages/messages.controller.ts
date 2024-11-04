@@ -1,5 +1,6 @@
 import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { log } from 'console';
+import { CreateMessageDto } from './dtos/create-message.dto'; // import our Data transfer object so we check for validation in our CRUD
 
 @Controller('messages')
 export class MessagesController {
@@ -11,7 +12,7 @@ export class MessagesController {
     console.log(id);
   }
   @Post()
-  createMessage(@Body body: any) {
+  createMessage(@Body() body: CreateMessageDto) {
     console.log(body);
   }
 }
