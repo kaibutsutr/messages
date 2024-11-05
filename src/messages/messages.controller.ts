@@ -1,4 +1,11 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  NotFoundException,
+} from '@nestjs/common';
 import { log } from 'console';
 import { CreateMessageDto } from './dtos/create-message.dto'; // import our Data transfer object so we check for validation in our CRUD
 import { MessagesService } from './messages.service'; // service we created is needed here. not the REPO
@@ -14,9 +21,13 @@ export class MessagesController {
     return this.messagesService.findAll(); // use the service. we need return here to return something after a request
   }
   @Get('/:id') // this one works only with wildcard
-  getMessage(@Param('id') id: string) {
+  async getMessage(@Param('id') id: string) {
     // get id value from Param decorator and assign to id variable
-    return this.messagesService.findOne(id); // pass id to service then to repo
+    const message = await this.messagesService.findOne(id); // check if message with id actually exists
+    if (!message) {
+      // if promise is refused then throw error
+      throw new NotFoundException('Message not found');
+    }
   }
   @Post()
   createMessage(@Body() body: CreateMessageDto) {
