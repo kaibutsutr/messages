@@ -12,14 +12,14 @@ import { MessagesService } from './messages.service'; // service we created is n
 
 @Controller('messages')
 export class MessagesController {
+  constructor(public messagesService: MessagesService) {}
   // this kind of code below doesnt follow the INVERSE OF CONTROL principle therefore its a bad coding practice
   // we dont want our classes creating its own dependancy instances
   // messagesService: MessagesService; // assign property
   // constructor() {
   //   this.messagesService = new MessagesService(); // create dependency
   // }
-// correct version :
-constructor(public messagesService:MessagesService);
+  // correct version :
 
   @Get() // decorators here saves us from typing everything.
   listMessages() {
