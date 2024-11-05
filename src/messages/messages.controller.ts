@@ -1,3 +1,5 @@
+import { Injectable } from '@nestjs/common';
+
 import {
   Controller,
   Get,
@@ -9,7 +11,7 @@ import {
 import { log } from 'console';
 import { CreateMessageDto } from './dtos/create-message.dto'; // import our Data transfer object so we check for validation in our CRUD
 import { MessagesService } from './messages.service'; // service we created is needed here. not the REPO
-
+@Injectable() // mark the class
 @Controller('messages')
 export class MessagesController {
   constructor(public messagesService: MessagesService) {}
