@@ -14,8 +14,8 @@ export class MessagesRepository {
     return messages; // return the object
   }
   async createOne(content: string) {
-    const contents = await readFile('/messages.json', 'utf8'); //open up the file
-    const messages = JSON.parse(contets); // read the contents and assign to objest
+    const contents = await readFile('messages.json', 'utf8'); //open up the file
+    const messages = JSON.parse(contents); // read the contents and assign to objest
     const id = Math.floor(Math.random() * 1000); // pick a random id
     messages.id = { id, content: content }; // messages.id={id, content}; same thing. Write the message in object
     await writeFile('messages.json', JSON.stringify(messages)); // update the new messages file to messages.json
