@@ -1,5 +1,6 @@
+import { Injectable } from '@nestjs/common';
 import { readFile, writeFile } from 'fs/promises'; // we need these from node to read write
-
+@Injectable() // mark the class as dependancy
 export class MessagesRepository {
   // we always create a class in nest
   async findOne(id: string) {
